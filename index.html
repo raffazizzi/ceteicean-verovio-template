@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+
+  <head>
+    <title>My project</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="css/CETEIcean.css" media="all" />
+    <link rel="stylesheet" href="css/style.css" media="all" />
+    <script src="js/CETEI.js"></script>
+    <script src="js/verovio.js"></script>
+  </head>
+
+  <body>
+
+    <div id="MEI"></div>
+    <div id="TEI"></div>
+
+    <script>
+      var CETEIcean = new CETEI()
+      CETEIcean.getHTML5("data/example.xml", function(data) {
+       document.getElementById("TEI").appendChild(data)
+      })
+      var vrvToolkit = new verovio.toolkit()
+      vrvToolkit.setOptions(options = {
+          pageHeight: 500,
+          pageWidth: 1000,
+          ignoreLayout: 1,
+          border: 20,
+          scale: 50,
+          adjustPageHeight: true
+      })
+      fetch("data/example.mei").then(function( response ) {
+          response.text().then(function( data ) {
+            var svg = vrvToolkit.renderData(data, {})
+            document.getElementById('MEI').innerHTML = svg
+          })
+      })
+    </script>
+  </body>
+
+</html>
