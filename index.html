@@ -12,13 +12,28 @@
 
   <body>
 
-    <div id="MEI"></div>
     <div id="TEI"></div>
+    <div id="MEI"></div>
+    <div id="MEImeta"></div>
 
     <script>
-      var CETEIcean = new CETEI()
+      // Get, parse, and show TEI data
+      var CETEIcean = new CETEI()      
       CETEIcean.getHTML5("data/example.xml", function(data) {
-       document.getElementById("TEI").appendChild(data)
+        document.getElementById("TEI").appendChild(data)
+      })
+      // Get, parse and show MEI header data
+      var CETEI4MEI = new CETEI()
+      CETEI4MEI.addBehaviors({
+        namespaces: {
+          mei: "http://www.music-encoding.org/ns/mei"
+        }
+      })
+      CETEI4MEI.getHTML5("data/example.mei", function(data) {
+        // get header
+        var meiHead = data.querySelector('mei-meiHead')
+        window.mh = meiHead
+        document.getElementById("MEImeta").appendChild(meiHead)
       })
       var vrvToolkit = new verovio.toolkit()
       vrvToolkit.setOptions(options = {

@@ -10,3 +10,25 @@ tei-teiHeader {
 tei-supplied {
   font-style: italic;
 }
+
+/* MEI-specific styles */
+mei-meiHead {
+  display: block;
+  border: 1px solid Black;
+  padding: 1em;
+}
+
+mei-title {
+  display: block;
+  font-size: 120%;
+  font-weight: bolder;
+}
+
+mei-pubStmt {
+  display: block;
+  font-style: italic;
+}
+
+mei-pubStmt::before {
+  content: "Publication: ";
+}
