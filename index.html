@@ -24,15 +24,14 @@
       })
       // Get, parse and show MEI header data
       var CETEI4MEI = new CETEI()
-      CETEI4MEI.addBehaviors({
-        namespaces: {
-          mei: "http://www.music-encoding.org/ns/mei"
-        }
-      })
+CETEI4MEI.addBehaviors({
+  namespaces: {
+    mei: "http://www.music-encoding.org/ns/mei"
+  }
+})
       CETEI4MEI.getHTML5("data/example.mei", function(data) {
         // get header
         var meiHead = data.querySelector('mei-meiHead')
-        window.mh = meiHead
         document.getElementById("MEImeta").appendChild(meiHead)
       })
       var vrvToolkit = new verovio.toolkit()
