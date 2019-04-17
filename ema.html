@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+
+  <head>
+    <title>My project</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="css/CETEIcean.css" media="all" />
+    <link rel="stylesheet" href="css/style.css" media="all" />
+    <script src="js/CETEI.js"></script>
+    <script src="js/verovio.js"></script>
+  </head>
+
+  <body>
+
+    <div style="float:right"><a href="data/ema.xml">TEI source</a><br/><a href="https://www.verovio.org/examples/downloads/Chopin_Etude_op.10_no.9.mei">MEI source</a></div>
+    <div id="TEI"></div>
+    <div id="MEI" style="width: 1000px">Loading Score data...</div>
+
+    <script>
+      var CETEIcean = new CETEI()
+      CETEIcean.getHTML5("data/ema.xml", function(data) {
+       document.getElementById("TEI").appendChild(data)
+      })
+      var vrvToolkit = new verovio.toolkit()
+      vrvToolkit.setOptions(options = {
+        pageHeight: 2100,
+        pageWidth: 4200,
+        ignoreLayout: 1,
+        border: 20,
+        scale: 40
+      })
+      fetch("https://ema.crimproject.org/https%3A%2F%2Fwww.verovio.org%2Fexamples%2Fdownloads%2FChopin_Etude_op.10_no.9.mei/3-4/all/@all").then(function( response ) {
+          response.text().then(function( data ) {
+            // New version of Verovio requires a scoredef as first child of score, so we duplicate it.
+            meiData = new DOMParser().parseFromString(data, 'text/xml')
+            meiHead = meiData.querySelector('meiHead')
+            meiHead.parentElement.removeChild(meiHead)
+            const scoreDef = meiData.querySelector('music scoreDef')
+            meiData.querySelector('music score').prepend(scoreDef)
+            meiString = new XMLSerializer().serializeToString(meiData)
+            var svg = vrvToolkit.renderData(meiString, {})
+            document.getElementById('MEI').innerHTML = svg
+          })
+      })
+    </script>
+  </body>
+
+</html>

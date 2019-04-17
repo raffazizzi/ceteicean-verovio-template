@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://www.tei-c.org/Vault/P5/current/xml/tei/custom/schema/relaxng/tei_all.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<?xml-model href="http://www.tei-c.org/Vault/P5/current/xml/tei/custom/schema/relaxng/tei_all.rng" type="application/xml" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0">
+  <teiHeader>
+      <fileDesc>
+         <titleStmt>
+            <title>Music Addressability API and Chopin's Etude in F Minor</title>
+         </titleStmt>
+         <publicationStmt>
+            <p>Publication Information</p>
+         </publicationStmt>
+         <sourceDesc>
+            <p>Information  about the source</p>
+         </sourceDesc>
+      </fileDesc>
+  </teiHeader>
+  <text>
+      <body>
+         <div>
+           <head>Enhancing Music Notation Addressability API and Chopin's Etude in F Minor</head>
+           <p>In this example, we use the Enhancing Music Notation Addressability (EMA) API to refer to a specific part of Chopin's <title>Etude in F Minor</title>.</p>
+           <p>The MEI file for the full Etude is available <ref target="https://www.verovio.org/mei-viewer.xhtml?file=examples/downloads/Chopin_Etude_op.10_no.9.mei">on the Verovio website</ref>.</p>
+           <p>This example uses the EMA to refer to a specific section of the document: the third and fourth measures.</p>
+           <p>The EMA expression for this selection is: <code>3-4/all/@all</code>.</p>
+         </div>
+      </body>
+  </text>
+</TEI>
