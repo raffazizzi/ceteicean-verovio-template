@@ -29,7 +29,7 @@
           scale: 50,
           adjustPageHeight: true
       })
-      fetch("https://mith.us/continuo/preview.html#https://ema.crimproject.org/https%3A%2F%2Fwww.verovio.org%2Fexamples%2Fdownloads%2FChopin_Etude_op.10_no.9.mei/3-4/1-2,1-2/@1-6+@1-6.5,@1+@1-6.5").then(function( response ) {
+      fetch("data/example.mei").then(function( response ) {
           response.text().then(function( data ) {
             var svg = vrvToolkit.renderData(data, {})
             document.getElementById('MEI').innerHTML = svg
