@@ -12,16 +12,10 @@
 
   <body>
 
-    <div id="TEI"></div>
-    <div id="MEI"></div>
     <div id="MEImeta"></div>
+    <div id="MEI"></div>
 
     <script>
-      // Get, parse, and show TEI data
-      var CETEIcean = new CETEI()      
-      CETEIcean.getHTML5("data/example.xml", function(data) {
-        document.getElementById("TEI").appendChild(data)
-      })
       // Get, parse and show MEI header data
       var CETEI4MEI = new CETEI()
       CETEI4MEI.addBehaviors({
@@ -36,17 +30,23 @@
       })
       var vrvToolkit = new verovio.toolkit()
       vrvToolkit.setOptions(options = {
-          pageHeight: 500,
+          pageHeight: 1000,
           pageWidth: 1000,
           ignoreLayout: 1,
           border: 20,
           scale: 50,
+          noHeader: true,
           adjustPageHeight: true
       })
       fetch("data/example.mei").then(function( response ) {
           response.text().then(function( data ) {
-            var svg = vrvToolkit.renderData(data, {})
-            document.getElementById('MEI').innerHTML = svg
+            vrvToolkit.loadData(data)
+            // Show all pages
+            var score = ''
+            for (let p of Array.from({length: vrvToolkit.getPageCount()}, (x,i) => i + 1)) {
+              score += vrvToolkit.renderPage(p)
+            }
+            document.getElementById('MEI').innerHTML = score
           })
       })
     </script>
